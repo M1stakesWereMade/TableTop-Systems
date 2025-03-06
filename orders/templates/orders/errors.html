@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ошибка</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'orders/styles.css' %}">
+</head>
+<body>
+    <div class="error-page">
+        <h1><i class="fas fa-exclamation-triangle"></i> Ошибка!</h1>
+        <p>{{ message }}</p>
+        <a href="{% url 'order_list' %}" class="button">Вернуться к списку</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Список заказов</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'orders/styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>Кафе "Anteiku"</header>
+    
+    <!-- Форма поиска -->
+    <div class="search-container">
+        <form method="get">
+            <input type="text" name="q" placeholder="Поиск по номеру стола" value="{{ query }}">
+            <select name="status">
+                <option value="">Все статусы</option>
+                <option value="pending" {% if status_filter == "pending" %}selected{% endif %}>В ожидании</option>
+                <option value="ready" {% if status_filter == "ready" %}selected{% endif %}>Готово</option>
+                <option value="paid" {% if status_filter == "paid" %}selected{% endif %}>Оплачено</option>
+            </select>
+            <button type="submit"><i class="fas fa-search"></i></button>
+        </form>
+    </div>
+
+    <a href="{% url 'create_order' %}" class="button">Добавить заказ</a>
+
+    <div class="order-list">
+        {% for order in orders %}
+        <div class="order-card">
+            <h3>Заказ #{{ order.id }}</h3>
+            <p><strong>Стол:</strong> {{ order.table_number }}</p>
+            <p><strong>Блюда:</strong></p>
+            <ul>
+                {% for item in order.items %}
+                <li>{{ item.name }} - {{ item.price }} руб.</li>
+                {% endfor %}
+            </ul>
+            <p><strong>Итого:</strong> {{ order.total_price }} руб.</p>
+            <div class="status {{ order.status }}">
+                {% if order.status == 'pending' %}
+                    <i class="fas fa-hourglass-half"></i> В ожидании
+                {% elif order.status == 'ready' %}
+                    <i class="fas fa-check-circle"></i> Готово
+                {% else %}
+                    <i class="fas fa-money-bill-alt"></i> Оплачено
+                {% endif %}
+            </div>
+            <div class="actions">
+                <a href="{% url 'update_order' order.id %}"><i class="fas fa-edit"></i> Изменить</a>
+                <a href="{% url 'delete_order' order.id %}"><i class="fas fa-trash"></i> Удалить</a>
+            </div>
+        </div>
+        {% empty %}
+        <div class="order-card">
+            <p>Нет заказов.</p>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

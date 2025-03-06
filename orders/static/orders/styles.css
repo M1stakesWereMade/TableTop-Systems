@@ -1,0 +1,309 @@
+/* Базовые стили */
+body {
+    font-family: 'Cinzel', serif;
+    background: #f5e7d3; /* Цвет стены кафе */
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Текстура фона */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.1;
+    z-index: -1;
+}
+
+/* Шапка */
+header {
+    background: #a87d58; /* Цвет дерева */
+    padding: 20px;
+    text-align: center;
+    color: white;
+    font-size: 2em;
+    font-weight: bold;
+}
+
+/* Кнопки */
+button, a.button {
+    background: #e67e22; /* Цвет кофе */
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+button:hover, a.button:hover {
+    background: #d35400;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Форма поиска */
+.search-container {
+    margin: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.search-container input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    flex: 1;
+}
+
+.search-container select {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+/* Карточки заказов */
+.order-card {
+    background: white;
+    padding: 20px;
+    border: 2px solid #a87d58;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+    transition: transform 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.order-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.order-card h3 {
+    color: #a87d58;
+    border-bottom: 2px solid #a87d58;
+    padding-bottom: 10px;
+}
+
+/* Статусы заказов */
+.status {
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.status.pending {
+    background: #ff9f43; /* Желтый */
+    color: white;
+}
+
+.status.ready {
+    background: #2ecc71; /* Зеленый */
+    color: white;
+}
+
+.status.paid {
+    background: #3498db; /* Синий */
+    color: white;
+}
+
+/* Действия с заказом */
+.actions {
+    margin-top: auto;
+    display: flex;
+    gap: 15px;
+}
+
+.actions a {
+    padding: 8px 15px;
+    border-radius: 20px;
+    transition: all 0.2s ease;
+    text-decoration: none;
+}
+
+.actions a:hover {
+    background: #e6e6e6;
+}
+
+/* Рамка для списка заказов */
+.order-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Анимация загрузки */
+.loading {
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #e67e22;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+}
+
+/* Формы создания/редактирования */
+.form-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 30px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #a87d58;
+    font-weight: bold;
+}
+
+.form-group input, .form-group textarea, .form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    resize: vertical;
+}
+
+.form-group textarea {
+    height: 150px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Ошибки */
+.error-page {
+    text-align: center;
+    padding: 50px;
+    color: #a87d58;
+}
+
+.error-page h1 {
+    font-size: 2em;
+    color: #e67e22;
+}
+
+/* Резиновый макет */
+@media (max-width: 768px) {
+    .order-card {
+        padding: 15px;
+    }
+    .search-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+/* Стили для формы удаления */
+.delete-form {
+    display: flex;
+    justify-content: center; /* Центрируем кнопки */
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.delete-form button {
+    flex: 1;
+    text-align: center;
+}
+
+.delete-form .button {
+    background-color: #e74c3c; /* Красный для "Удалить" */
+}
+
+.delete-form .button.cancel {
+    background-color: #3498db; /* Синий для "Отмена" */
+}
+
+/* Стили для страницы выручки */
+.revenue-container {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.revenue-total {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+    transition: transform 0.2s ease;
+}
+
+.revenue-total:hover {
+    transform: translateY(-5px);
+}
+
+.revenue-total h2 {
+    color: #a87d58;
+    border-bottom: 2px solid #a87d58;
+    padding-bottom: 15px;
+}
+
+.revenue-total span {
+    font-size: 2em;
+    color: #e67e22;
+    font-weight: bold;
+}
+
+.revenue-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 30px 0; /* Добавлен отступ сверху и снизу */
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.revenue-table th,
+.revenue-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.revenue-table th {
+    background: #f5e7d3;
+    color: #a87d58;
+}
+
+.revenue-table tr:hover {
+    background: #f8f9fa;
+}
+
+.back-button {
+    display: inline-block;
+    margin-top: 40px; /* Увеличен отступ сверху */
+    text-align: center;
+}

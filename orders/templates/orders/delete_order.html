@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Удалить заказ</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'orders/styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>Кафе "Уютный уголок"</header>
+    
+    <div class="error-page">
+        <h1>Вы уверены, что хотите удалить заказ #{{ order.id }}?</h1>
+        <div class="delete-form">
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit" class="button"><i class="fas fa-trash"></i> Удалить</button>
+            </form>
+            <a href="{% url 'order_list' %}" class="button cancel"><i class="fas fa-arrow-left"></i> Отмена</a>
+        </div>
+    </div>
+</body>
+</html>

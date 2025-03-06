@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Отчет о выручке</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'orders/styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>Кафе "Уютный уголок"</header>
+    
+    <div class="revenue-container">
+        <div class="revenue-total">
+            <h2>Общая выручка</h2>
+            <span>{{ total_revenue }} ₽</span>
+            <i class="fas fa-coins fa-2x" style="color: #e67e22;"></i>
+        </div>
+
+        {% if paid_orders %}
+            <h3>Оплаченные заказы</h3>
+            <table class="revenue-table">
+                <thead>
+                    <tr>
+                        <th>Заказ #</th>
+                        <th>Стол</th>
+                        <th>Сумма</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in paid_orders %}
+                    <tr>
+                        <td>{{ order.id }}</td>
+                        <td>{{ order.table_number }}</td>
+                        <td>{{ order.total_price }} ₽</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="3">Нет оплаченных заказов.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>Нет оплаченных заказов.</p>
+        {% endif %}
+        
+        <div class="back-button">
+            <a href="{% url 'order_list' %}" class="button">
+                <i class="fas fa-arrow-left"></i> Назад к заказам
+            </a>
+        </div>
+    </div>
+</body>
+</html>
