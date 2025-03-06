@@ -1,5 +1,7 @@
 from django import forms
 from .models import Order
+from decimal import Decimal
+
 
 class OrderForm(forms.ModelForm):
     items_text = forms.CharField(
@@ -11,7 +13,7 @@ class OrderForm(forms.ModelForm):
 
     class Meta:
         model = Order
-        fields = ['table_number', 'status']
+        fields = ['table_number', 'status', 'items_text']
 
     def clean_items_text(self):
         items_text = self.cleaned_data['items_text']
@@ -22,17 +24,18 @@ class OrderForm(forms.ModelForm):
                 continue
             try:
                 name, price = line.split(' - ')
-                price = float(price)
+                # Преобразуем в Decimal для точности, затем в float для JSON
+                price = float(Decimal(price).quantize(Decimal('0.00')))
                 items.append({'name': name, 'price': price})
             except ValueError:
-                raise forms.ValidationError(
-                    f"Неверный формат строки: '{line}'. Используйте 'Название - Цена'"
-                )
+                raise forms.ValidationError(f"Неверный формат строки: '{line}'")
         return items
 
     def save(self, commit=True):
         instance = super().save(commit=False)
         instance.items = self.cleaned_data['items_text']
+        # Теперь calculate_total_price() возвращает Decimal
+        instance.total_price = instance.calculate_total_price().quantize(Decimal('0.00'))
         if commit:
             instance.save()
         return instance

@@ -118,7 +118,7 @@ def update_order(request, pk):
 
 def revenue_report(request):
     paid_orders = Order.objects.filter(status='paid')
-    total_revenue = sum(order.total_price for order in paid_orders)
+    total_revenue = sum(order.total_price or 0 for order in paid_orders)
     return render(request, 'orders/revenue_report.html', {
         'total_revenue': total_revenue,
         'paid_orders': paid_orders,
