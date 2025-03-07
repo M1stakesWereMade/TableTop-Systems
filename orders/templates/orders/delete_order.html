@@ -1,3 +1,4 @@
+<!-- Страница подтверждения удаления -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,11 +13,17 @@
     <div class="error-page">
         <h1>Вы уверены, что хотите удалить заказ #{{ order.id }}?</h1>
         <div class="delete-form">
+            <!-- Форма подтверждения удаления -->
             <form method="post">
                 {% csrf_token %}
-                <button type="submit" class="button"><i class="fas fa-trash"></i> Удалить</button>
+                <button type="submit" class="button">
+                    <i class="fas fa-trash"></i> Удалить
+                </button>
             </form>
-            <a href="{% url 'order_list' %}" class="button cancel"><i class="fas fa-arrow-left"></i> Отмена</a>
+            <!-- Кнопка отмены -->
+            <a href="{% url 'order_list' %}" class="button cancel">
+                <i class="fas fa-arrow-left"></i> Отмена
+            </a>
         </div>
     </div>
 </body>

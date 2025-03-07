@@ -1,3 +1,4 @@
+<!-- Страница списка заказов -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,10 +10,10 @@
 <body>
     <header>Кафе "Anteiku"</header>
     
-    <!-- Форма поиска -->
+    <!-- Блок поиска -->
     <div class="search-container">
         <form method="get">
-            <input type="text" name="q" placeholder="Поиск по номеру стола" value="{{ query }}">
+            <input type="text" name="q" placeholder="Поиск по номеру стола" value="{{ query|default_if_none:'' }}">
             <select name="status">
                 <option value="">Все статусы</option>
                 <option value="pending" {% if status_filter == "pending" %}selected{% endif %}>В ожидании</option>
@@ -23,6 +24,7 @@
         </form>
     </div>
 
+    <!-- Кнопка добавления заказа -->
     <a href="{% url 'create_order' %}" class="button">Добавить заказ</a>
 
     <div class="order-list">
@@ -37,6 +39,7 @@
                 {% endfor %}
             </ul>
             <p><strong>Итого:</strong> {{ order.total_price }} руб.</p>
+            <!-- Блок статуса с иконкой -->
             <div class="status {{ order.status }}">
                 {% if order.status == 'pending' %}
                     <i class="fas fa-hourglass-half"></i> В ожидании
@@ -46,9 +49,14 @@
                     <i class="fas fa-money-bill-alt"></i> Оплачено
                 {% endif %}
             </div>
+            <!-- Действия с заказом -->
             <div class="actions">
-                <a href="{% url 'update_order' order.id %}"><i class="fas fa-edit"></i> Изменить</a>
-                <a href="{% url 'delete_order' order.id %}"><i class="fas fa-trash"></i> Удалить</a>
+                <a href="{% url 'update_order' order.id %}">
+                    <i class="fas fa-edit"></i> Изменить
+                </a>
+                <a href="{% url 'delete_order' order.id %}">
+                    <i class="fas fa-trash"></i> Удалить
+                </a>
             </div>
         </div>
         {% empty %}

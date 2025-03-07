@@ -1,3 +1,4 @@
+<!-- Страница ошибки -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,9 +8,13 @@
 </head>
 <body>
     <div class="error-page">
-        <h1><i class="fas fa-exclamation-triangle"></i> Ошибка!</h1>
-        <p>{{ message }}</p>
-        <a href="{% url 'order_list' %}" class="button">Вернуться к списку</a>
+        <h1>
+            <i class="fas fa-exclamation-triangle"></i> Ошибка!
+        </h1>
+        <p>{{ message }}</p> <!-- Сообщение об ошибке -->
+        <a href="{% url 'order_list' %}" class="button">
+            Вернуться к списку
+        </a>
     </div>
 </body>
 </html>

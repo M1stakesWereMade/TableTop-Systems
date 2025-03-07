@@ -304,6 +304,6 @@ button:hover, a.button:hover {
 
 .back-button {
     display: inline-block;
-    margin-top: 40px; /* Увеличен отступ сверху */
+    margin-top: 40px;
     text-align: center;
 }

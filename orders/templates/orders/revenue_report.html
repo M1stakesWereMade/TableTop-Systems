@@ -1,3 +1,4 @@
+<!-- Страница отчета о выручке -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,12 +11,14 @@
     <header>Кафе "Уютный уголок"</header>
     
     <div class="revenue-container">
+        <!-- Блок общей выручки -->
         <div class="revenue-total">
             <h2>Общая выручка</h2>
             <span>{{ total_revenue|floatformat:2 }} ₽</span>
             <i class="fas fa-coins fa-2x" style="color: #e67e22;"></i>
         </div>
 
+        <!-- Таблица оплаченных заказов -->
         {% if paid_orders %}
             <h3>Оплаченные заказы</h3>
             <table class="revenue-table">
@@ -44,6 +47,7 @@
             <p>Нет оплаченных заказов.</p>
         {% endif %}
         
+        <!-- Кнопка возврата к списку заказов -->
         <div class="back-button">
             <a href="{% url 'order_list' %}" class="button">
                 <i class="fas fa-arrow-left"></i> Назад к заказам

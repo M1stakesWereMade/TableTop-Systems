@@ -1,3 +1,4 @@
+<!-- Страница редактирования заказа -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,6 +14,7 @@
         <h2>Изменить заказ #{{ form.instance.id }}</h2>
         <form method="post">
             {% csrf_token %}
+            <!-- Группа полей формы -->
             <div class="form-group">
                 <label for="id_table_number">Номер стола</label>
                 {{ form.table_number }}
@@ -25,12 +27,15 @@
                 <label for="id_status">Статус</label>
                 {{ form.status }}
             </div>
+            <!-- Блок вывода ошибок -->
             {% if form.errors %}
                 <div class="error-message">
                     <p>Ошибка: {{ form.non_field_errors }}</p>
                 </div>
             {% endif %}
-            <button type="submit" class="button"><i class="fas fa-save"></i> Сохранить</button>
+            <button type="submit" class="button">
+                <i class="fas fa-save"></i> Сохранить
+            </button>
         </form>
     </div>
 </body>

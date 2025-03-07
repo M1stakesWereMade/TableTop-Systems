@@ -1,3 +1,4 @@
+<!-- Страница создания заказа -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,24 +14,28 @@
         <h2>Добавить заказ</h2>
         <form method="post">
             {% csrf_token %}
+            <!-- Группа полей формы -->
             <div class="form-group">
                 <label for="id_table_number">Номер стола</label>
                 {{ form.table_number }}
             </div>
             <div class="form-group">
                 <label for="id_items_text">Блюда (название - цена)</label>
-                {{ form.items_text }}
+                {{ form.items_text }} <!-- Поле для ввода блюд -->
             </div>
             <div class="form-group">
                 <label for="id_status">Статус</label>
-                {{ form.status }}
+                {{ form.status }} <!-- Выбор статуса -->
             </div>
+            <!-- Блок вывода ошибок -->
             {% if form.errors %}
                 <div class="error-message">
                     <p>Ошибка: {{ form.non_field_errors }}</p>
                 </div>
             {% endif %}
-            <button type="submit" class="button"><i class="fas fa-save"></i> Сохранить</button>
+            <button type="submit" class="button">
+                <i class="fas fa-save"></i> Сохранить
+            </button>
         </form>
     </div>
 </body>
