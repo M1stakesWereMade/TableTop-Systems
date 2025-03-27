@@ -1,5 +1,3 @@
-# MIT License
-# Copyright (c) 2025 M1stakesWereMade
 from django import forms
 from .models import Order
 from decimal import Decimal
