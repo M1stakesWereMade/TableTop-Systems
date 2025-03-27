@@ -1,3 +1,5 @@
+# MIT License
+# Copyright (c) 2025 M1stakesWereMade
 from django.apps import AppConfig
 
 class OrdersConfig(AppConfig):
