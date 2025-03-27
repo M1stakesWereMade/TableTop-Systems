@@ -1,5 +1,3 @@
-# MIT License
-# Copyright (c) 2025 M1stakesWereMade
 from django.contrib import admin
 from .models import Order
 
